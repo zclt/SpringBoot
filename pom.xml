@@ -14,12 +14,26 @@
     </parent>
 
     <dependencies>
+        <!-- Spring boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-    </dependencies>
+        <!-- https://spring.io/guides/gs/spring-boot -->
 
+        <!-- Dependencies for web service -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+        <!-- -->
+    </dependencies>
+    
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -31,6 +45,27 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Generate domain classes based on an XML schema-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <source>${project.basedir}/src/main/resources/</source>
+                    </sources>
+                </configuration>
+            </plugin>
+            <!-- https://spring.io/guides/gs/producing-web-service/ -->
         </plugins>
     </build>
 
